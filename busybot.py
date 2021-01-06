@@ -6,6 +6,7 @@ broker = "192.168.0.100"
 topic = "study/busybot"
 
 def scroll_message(message):
+    print('Scrolling ' + message)
     # Clear the display and reset scrolling to (0, 0)
     scrollphathd.clear()
     length = scrollphathd.write_string(message)  # Write out your message
@@ -36,3 +37,5 @@ client.subscribe("study/busybot")
 client.on_message = on_message
 client.loop_start()
 
+while True:
+  pass
