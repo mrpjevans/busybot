@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import time
 import scrollphathd
 
@@ -26,5 +24,5 @@ def scroll_message(message):
     # Delay at the end of scrolling
     time.sleep(0.5)
 
-
-scroll_message("Test")
+while True:
+  scroll_message("Test message")
