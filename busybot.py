@@ -14,9 +14,9 @@ def scroll_message():
   global current_message
   while True:
 
-    if current_message == '':
+    if len(current_message) is 0:
       time.sleep(0.1)
-      pass
+      continue
 
     print('Scrolling "' + current_message + '"')
     # Clear the display and reset scrolling to (0, 0)
