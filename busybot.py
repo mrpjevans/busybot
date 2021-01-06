@@ -3,11 +3,12 @@ import scrollphathd
 import paho.mqtt.client as mqtt
 
 # Change these to suit your needs
-broker = "192.168.0.100"
-client_name = "busybot"
-topic = "study/busybot"
+broker = '192.168.0.100'
+client_name = 'busybot'
+topic = 'study/busybot'
+brightness = 0.1
 
-current_message = ""
+current_message = ''
 
 # Original function by Pimoroni x
 def scroll_message():
@@ -18,9 +19,6 @@ def scroll_message():
     if len(current_message) is 0:
       time.sleep(1)
       continue
-
-    # Show our message
-    print('Scrolling "' + current_message + '"')
 
     # Clear the display and reset scrolling to (0, 0)
     scrollphathd.clear()
@@ -45,6 +43,10 @@ def on_message(client, userdata, message):
   global current_message
   print('MQTT Message received')
   current_message = message.payload.decode("utf-8")
+  if len(current_message) == 0:
+    print('Clearing message')
+  else:
+    print('Scrolling ' + current_message)
   
 print('Starting')
 client = mqtt.Client(client_name)
@@ -55,4 +57,5 @@ client.on_message = on_message
 print('Listening to ' + topic)
 client.loop_start()
 
+scrollphathd.set_brightness(brightness)
 scroll_message()
