@@ -11,6 +11,7 @@ current_message = ""
 
 # Original function by Pimoroni x
 def scroll_message():
+  global current_message
   while True:
 
     if current_message == '':
@@ -41,6 +42,7 @@ def scroll_message():
 
 
 def on_message(client, userdata, message):
+  global current_message
   print('MQTT Message received')
   current_message = message.payload.decode("utf-8")
   
