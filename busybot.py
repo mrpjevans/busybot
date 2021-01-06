@@ -1,6 +1,9 @@
 import time
 import scrollphathd
+import paho.mqtt.client as mqtt
 
+broker = "192.168.0.100"
+topic = "study/busybot"
 
 def scroll_message(message):
     # Clear the display and reset scrolling to (0, 0)
@@ -24,5 +27,12 @@ def scroll_message(message):
     # Delay at the end of scrolling
     time.sleep(0.5)
 
-while True:
-  scroll_message("Test message")
+def on_message(client, userdata, message):
+  scroll_message(message.payload.decode("utf-8"))
+
+client = mqtt.Client("busybot")
+client.connect(broker)
+client.subscribe("study/busybot")
+client.on_message = on_message
+client.loop_start()
+
