@@ -7,6 +7,7 @@ broker = "192.168.0.100"
 client_name = "busybot"
 topic = "study/busybot"
 
+
 # Original function by Pimoroni x
 def scroll_message(message):
     print('Scrolling "' + message + '"')
@@ -31,14 +32,19 @@ def scroll_message(message):
     # Delay at the end of scrolling
     time.sleep(0.5)
 
+
 def on_message(client, userdata, message):
   print('MQTT Message received')
-  scroll_message(message.payload.decode("utf-8"))
-
+  scrollphathd.clear()
+  length = scrollphathd.write_string(message.payload.decode("utf-8"))  # Write out your message
+  scrollphathd.show()                          # Show the result
+  print('Displayed ' + message.payload.decode("utf-8"))
 
 print('Starting')
 client = mqtt.Client(client_name)
 client.connect(broker)
 client.subscribe(topic)
 client.on_message = on_message
+
+print('Listening to ' + topic)
 client.loop_forever()
