@@ -14,16 +14,18 @@ def scroll_message():
   global current_message
   while True:
 
+    # No message? Don't do anything.
     if len(current_message) is 0:
-      time.sleep(0.1)
+      time.sleep(1)
       continue
 
+    # Show our message
     print('Scrolling "' + current_message + '"')
+
     # Clear the display and reset scrolling to (0, 0)
     scrollphathd.clear()
-    length = scrollphathd.write_string(current_message)  # Write out your message
-    scrollphathd.show()                          # Show the result
-    # Initial delay before scrolling
+    length = scrollphathd.write_string(current_message)
+    scrollphathd.show()
     time.sleep(0.5)
 
     length -= scrollphathd.width
@@ -32,12 +34,10 @@ def scroll_message():
     while length > 0:
         # Scroll the buffer one place to the left
         scrollphathd.scroll(1)
-        scrollphathd.show()                      # Show the result
+        scrollphathd.show()
         length -= 1
-        # Delay for each scrolling step
         time.sleep(0.02)
 
-    # Delay at the end of scrolling
     time.sleep(0.5)
 
 
