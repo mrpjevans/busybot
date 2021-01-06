@@ -1,25 +1,12 @@
 import time
 import scrollphathd
 import paho.mqtt.client as mqtt
-import argparse
-
-parser = argparse.ArgumentParser(
-    description="Display messages from an MQTT topic on a Scroll pHAT HD")
-parser.add_argument("-b", "--broker", type=str,
-                    help="Address of MQTT broker (default 127.0.0.1)", default="127.0.0.1")
-parser.add_argument("-c", "--client", type=str,
-                    help="Client name (default 'busybot')", default="busybot")
-parser.add_argument("-t", "--topic", type=str,
-                    help="Topic to subscribe to (default 'busybot')", default="busybot")
-parser.add_argument("--brightness", type=float,
-                    help="Brightness (0.1 - 1) (default 0.1)", default=0.1)
-args = parser.parse_args()
 
 # Change these to suit your needs
-broker = args.broker
-client_name = args.client
-topic = args.topic
-brightness = args.brightness
+broker = '192.168.0.100'
+client_name = 'busybot'
+topic = 'study/busybot'
+brightness = 0.1
 
 current_message = ''
 
