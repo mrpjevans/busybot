@@ -35,6 +35,7 @@ def scroll_message():
         # No message? Don't do anything.
         if len(current_message) is 0:
             scrollphathd.clear()
+            scrollphathd.show()
             time.sleep(1)
             continue
 
