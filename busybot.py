@@ -88,4 +88,9 @@ client.loop_start()
 
 scrollphathd.set_brightness(brightness)
 scrollphathd.flip(flip, flip)
+
+scrollphathd.write_string('Ok')
+scrollphathd.show()
+time.sleep(1)
+
 scroll_message()
