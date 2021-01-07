@@ -13,6 +13,8 @@ parser.add_argument("-t", "--topic", type=str,
                     help="Topic to subscribe to (default 'busybot')", default="busybot")
 parser.add_argument("--brightness", type=float,
                     help="Brightness (0.1 - 1) (default 0.1)", default=0.1)
+parser.add_argument("-f", "--flip", action="store_true",
+                    help="Flip the display")
 args = parser.parse_args()
 
 # Change these to suit your needs
@@ -20,6 +22,7 @@ broker = args.broker
 client_name = args.client
 topic = args.topic
 brightness = args.brightness
+flip = args.flip
 
 current_message = ''
 
@@ -31,6 +34,7 @@ def scroll_message():
 
         # No message? Don't do anything.
         if len(current_message) is 0:
+            scrollphathd.clear()
             time.sleep(1)
             continue
 
@@ -73,4 +77,5 @@ print('Listening to ' + topic)
 client.loop_start()
 
 scrollphathd.set_brightness(brightness)
+scrollphathd.flip(flip, flip)
 scroll_message()
