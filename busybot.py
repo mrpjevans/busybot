@@ -24,18 +24,27 @@ topic = args.topic
 brightness = args.brightness
 flip = args.flip
 
-current_message = ''
+new_message = ''
 
 
 def scroll_message():
     # Original function by Pimoroni x
-    global current_message
+    global new_message
+    current_message = ''
+
     while True:
 
-        # No message? Don't do anything.
-        if len(current_message) is 0:
+        # If moving to a blank message, clear the display
+        if current_message != '' and new_message == '':
             scrollphathd.clear()
             scrollphathd.show()
+
+        # Update our current message
+        if current_message != new_message:
+            current_message = new_message
+
+        # No message? Don't do anything.
+        if current_message == '':
             time.sleep(1)
             continue
 
@@ -59,13 +68,13 @@ def scroll_message():
 
 
 def on_message(client, userdata, message):
-    global current_message
+    global new_message
     print('MQTT Message received')
-    current_message = message.payload.decode("utf-8")
-    if len(current_message) == 0:
-        print('Clearing message')
+    new_message = message.payload.decode("utf-8")
+    if len(new_message) == 0:
+        print('Clearing current message')
     else:
-        print('Scrolling ' + current_message)
+        print('Scrolling ' + new_message)
 
 
 print('Starting')
