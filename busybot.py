@@ -27,7 +27,27 @@ flip = args.flip
 new_message = ''
 
 
-def scroll_message():
+def scroll_message_single(message):
+    # Clear the display and reset scrolling to (0, 0)
+    scrollphathd.clear()
+    length = scrollphathd.write_string(message)
+    scrollphathd.show()
+    time.sleep(0.5)
+
+    length -= scrollphathd.width
+
+    # Now for the scrolling loop...
+    while length > 0:
+        # Scroll the buffer one place to the left
+        scrollphathd.scroll(1)
+        scrollphathd.show()
+        length -= 1
+        time.sleep(0.02)
+
+    time.sleep(0.5)
+
+
+def scroll_message_loop():
     # Original function by Pimoroni x
     global new_message
     current_message = ''
@@ -48,23 +68,7 @@ def scroll_message():
             time.sleep(1)
             continue
 
-        # Clear the display and reset scrolling to (0, 0)
-        scrollphathd.clear()
-        length = scrollphathd.write_string(current_message)
-        scrollphathd.show()
-        time.sleep(0.5)
-
-        length -= scrollphathd.width
-
-        # Now for the scrolling loop...
-        while length > 0:
-            # Scroll the buffer one place to the left
-            scrollphathd.scroll(1)
-            scrollphathd.show()
-            length -= 1
-            time.sleep(0.02)
-
-        time.sleep(0.5)
+        scroll_message_single(current_message)
 
 
 def on_message(client, userdata, message):
@@ -89,8 +93,8 @@ client.loop_start()
 scrollphathd.set_brightness(brightness)
 scrollphathd.flip(flip, flip)
 
-scrollphathd.write_string('Ok')
+scroll_message_single('Ready and listening')
+scrollphathd.clear()
 scrollphathd.show()
-time.sleep(1)
 
-scroll_message()
+scroll_message_loop()
