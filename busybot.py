@@ -93,7 +93,8 @@ client.loop_start()
 scrollphathd.set_brightness(brightness)
 scrollphathd.flip(flip, flip)
 
-scroll_message_single('Ready and listening')
+scroll_message_single('Connected to ' + broker)
+scroll_message_single('Subscribed to ' + topic)
 scrollphathd.clear()
 scrollphathd.show()
 
