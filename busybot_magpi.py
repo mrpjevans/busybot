@@ -61,4 +61,5 @@ print('Listening to ' + topic)
 client.loop_start()
 
 scrollphathd.set_brightness(brightness)
+# scrollphathd.flip(1, 1)
 scroll_message()
