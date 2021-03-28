@@ -30,8 +30,8 @@ broker for general use, just install it on BusyBot.
 ### Install Dependancies
 
 ```
-sudo apt -y update && sudo apt -y update
-sudo apt install git python3_pip
+sudo apt -y update && sudo apt -y full-upgrade
+sudo apt install git python3-pip
 sudo pip3 install paho-mqtt
 curl https://get.pimoroni.com/scrollphathd | bash
 sudo pip3 install smbus
@@ -178,5 +178,5 @@ Save and quit, then from the command line:
 
 ```
 sudo systemctl enable /usr/lib/systemd/buttonbot.service
-sudo systemctl start busybot
+sudo systemctl start buttonbot
 ```
